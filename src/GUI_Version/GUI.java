@@ -6,15 +6,17 @@ import javafx.application.Application;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GUI extends Application {
@@ -28,7 +30,7 @@ public class GUI extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         //Initial stuff
         Functionality functionality = new Functionality();
         ArrayList<DiceProp> diceProps = new ArrayList<>();
@@ -83,28 +85,36 @@ public class GUI extends Application {
             group.getChildren().add(r);
         }
 
+        Parent saveRoot = FXMLLoader.load(getClass().getResource("FileScreen.fxml"));
+
+        Scene savescene = new Scene(saveRoot, 800, 600);
+
         Scene scene = new Scene(group, 800, 600);
-        scene.setOnKeyTyped(event -> {
-            switch (event.getCode()) {
+        group.requestFocus();
+        scene.setOnKeyPressed(keyEvent -> {
+            switch (keyEvent.getCode())
+            {
                 case LEFT:
                     health.set(health.get() - 0.1);
                     break;
                 case RIGHT:
                     health.set(health.get() + 0.1);
+                    break;
             }
         });
 
-            //Bar positions
+        //Bar positions
         rectangles[0].setX(0);
-        rectangles[0].setY(0);
+        rectangles[0].setY(100);
         rectangles[1].setX(scene.getWidth()/2 - 100);
-        rectangles[1].setY(0);
+        rectangles[1].setY(100);
         rectangles[2].setX(scene.getWidth() - 200);
-        rectangles[2].setY(0);
+        rectangles[2].setY(100);
 
         primaryStage.setTitle("DSA Stat Manager by Loyal Raven Studios");
         scene.setFill(Color.STEELBLUE);
-        primaryStage.setScene(scene);
+        primaryStage.setScene(savescene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 }
