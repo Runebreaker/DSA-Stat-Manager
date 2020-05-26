@@ -5,6 +5,11 @@ public class Functionality
     private int[] stats = new int[6];
     private int[] painBorder = new int[4];
 
+    public Functionality()
+    {
+        this(0, 0, 0, 0, 0, 0);
+    }
+
     public Functionality(int[] list)
     {
         this(list[0], list[1], list[2], list[3], list[4], list[5]);
