@@ -14,3 +14,15 @@ Extra:
 2. Good looking GUI
 3. Map feature (changeable grid, figure placement)
 4. TBD...
+
+CLASSES (explain what they do):
+
+DiceProp: creates dice with specified sides and amount to dice pool, has roll function
+Functionality: Handles everything, which has to do with stats, health and resources
+Roll: Class to make it easier to output a roll and which die was used
+StatNames: ENUM to make stats more clear
+
+GUI: does what is says
+Terminal: for testing without having to use gui
+
+THE SAVE PACKAGE IS WHERE SAVES WILL BE LOCATED! (if it wasn't obvious)
