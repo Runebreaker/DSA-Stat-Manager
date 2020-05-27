@@ -11,6 +11,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -85,9 +86,11 @@ public class GUI extends Application {
             group.getChildren().add(r);
         }
 
-        Parent saveRoot = FXMLLoader.load(getClass().getResource("FileScreen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Pane p = fxmlLoader.load(getClass().getResource("FileScreen.fxml").openStream());
+        fxmlLoader.getController();
 
-        Scene savescene = new Scene(saveRoot, 800, 600);
+        Scene savescene = new Scene(p, 800, 600);
 
         Scene scene = new Scene(group, 800, 600);
         group.requestFocus();

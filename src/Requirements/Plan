@@ -1,0 +1,16 @@
+#What we are doing:
+Basically a client to make you p&p life easy (DSA only for now)
+
+Basic Functions:
+1. Enter all your stats that are important for rolling dice, health and resource(astral/karma) (dynamic)
+2. Enter modifiers to you roll
+3. Enter what stats you are rolling on (Presets would be preferable)
+4. Roll it! Calculated using everything above, returns quality level
+5. Basic GUI
+6. Terminal version for testing
+
+Extra:
+1. Profile system, save/load feature using all stats, if you use karma or astral etc.
+2. Good looking GUI
+3. Map feature (changeable grid, figure placement)
+4. TBD...
