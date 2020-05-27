@@ -1,6 +1,7 @@
 package GUI_Version;
 
 import FunctionalStuff.DiceProp;
+import FunctionalStuff.FXMLController;
 import FunctionalStuff.Functionality;
 import javafx.application.Application;
 import javafx.beans.binding.DoubleBinding;
@@ -12,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -86,11 +88,12 @@ public class GUI extends Application {
             group.getChildren().add(r);
         }
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Pane p = fxmlLoader.load(getClass().getResource("FileScreen.fxml").openStream());
-        fxmlLoader.getController();
+        //Import FXML File for GUI
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FileScreen.fxml"));
+        loader.setController(new FXMLController());
+        VBox saveroot = loader.load();
 
-        Scene savescene = new Scene(p, 800, 600);
+        Scene savescene = new Scene(saveroot, 800, 600);
 
         Scene scene = new Scene(group, 800, 600);
         group.requestFocus();

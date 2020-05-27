@@ -18,9 +18,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
+    <MenuBar prefWidth="800.0" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
@@ -61,7 +61,7 @@
     </MenuBar>
     <AnchorPane focusTraversable="true" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <HBox focusTraversable="true" prefHeight="375.0" prefWidth="640.0">
+            <HBox focusTraversable="true" prefHeight="575.0" prefWidth="800.0">
                <children>
                   <VBox alignment="TOP_CENTER" focusTraversable="true" prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -73,10 +73,10 @@
                         <ListView prefHeight="516.0" prefWidth="297.0" />
                         <ButtonBar prefHeight="58.0" prefWidth="297.0">
                           <buttons>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="New" />
-                              <Button mnemonicParsing="false" text="Save" />
-                              <Button mnemonicParsing="false" text="Load" />
-                            <Button mnemonicParsing="false" text="Delete" />
+                              <Button fx:id="create" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="New" />
+                              <Button fx:id="save" mnemonicParsing="false" text="Save" />
+                              <Button fx:id="load" mnemonicParsing="false" text="Load" />
+                            <Button fx:id="delete" mnemonicParsing="false" text="Delete" />
                           </buttons>
                         </ButtonBar>
                      </children>
