@@ -1,28 +1,62 @@
 package FunctionalStuff;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Functionality {
-    private int[] stats = new int[6];
+    private int[] stats;
     private int[] painBorder = new int[4];
     private ArrayList<DiceProp> diceProps = new ArrayList<>();
+    private Map<AttributeNames, Integer> attributes;
 
-    public Functionality() {
-        this(0, 0, 0, 0, 0, 0);
-    }
-
-    public Functionality(int[] list) {
-        this(list[0], list[1], list[2], list[3], list[4], list[5]);
-    }
-
-    public Functionality(int h, int hm, int k, int km, int a, int am) {
-        int[] temp = {h, hm, k, km, a, am};
-        for (int i : stats) {
-            stats[i] = temp[i];
-        }
+    public Functionality(int[] list, Map<AttributeNames, Integer> attributes) {
+        this.stats = list;
         for (int i : painBorder) {
-            painBorder[i] = (int) Math.ceil(h / 4.0);
+            painBorder[i] = (int) Math.ceil(list[1] / 4.0);
         }
+        this.attributes = attributes;
+        for(AttributeNames a : AttributeNames.values())
+        {
+            attributes.put(a, 0);
+        }
+    }
+
+    public int[] getStats() {
+        return stats;
+    }
+
+    public void setStats(int[] stats) {
+        this.stats = stats;
+    }
+
+    public int[] getPainBorder() {
+        return painBorder;
+    }
+
+    public ArrayList<DiceProp> getDiceProps() {
+        return diceProps;
+    }
+
+    public boolean changeDice(int sides, int amount) {
+        int total = amount;
+        for(DiceProp d : diceProps)
+        {
+            if(d.getSides() == sides)
+            {
+                total += d.getAmount();
+                diceProps.remove(d);
+            }
+        }
+        if(total > 0)diceProps.add(new DiceProp(sides, total));
+        return total <= 0;
+    }
+
+    public Map<AttributeNames, Integer> getAttributes() {
+        return attributes;
+    }
+
+    public void editAttributes(AttributeNames attributeNames, int newValue) {
+        attributes.replace(attributeNames, newValue);
     }
 
     public int getHealth() {

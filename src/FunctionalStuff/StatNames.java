@@ -6,17 +6,7 @@ public enum StatNames {
     K("KARMA"),
     KM("KARMA_MAX"),
     A("ASTRAL"),
-    AM("ASTRAL_MAX"),
-
-    //Format: mu, kl, in, ch, ff, ge, ko, kk
-    MU("Mut"),
-    KL("Klugheit"),
-    IN("Intuition"),
-    CH("Charisma"),
-    FF("Fingerfertigkeit"),
-    GE("Geschicklichkeit"),
-    KO("Konstitution"),
-    KK("Körperkraft");
+    AM("ASTRAL_MAX");
 
     private String Stat;
 

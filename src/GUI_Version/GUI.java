@@ -1,14 +1,11 @@
 package GUI_Version;
 
-import FunctionalStuff.DiceProp;
 import FunctionalStuff.Functionality;
 import FunctionalStuff.SaveManager;
 import javafx.application.Application;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +23,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GUI extends Application implements Initializable {
@@ -86,37 +82,6 @@ public class GUI extends Application implements Initializable {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        //Format: mu, kl, in, ch, ff, ge, ko, kk
-        Text[] texts = {
-                new Text("MU"),
-                new Text("KL"),
-                new Text("IN"),
-                new Text("CH"),
-                new Text("FF"),
-                new Text("GE"),
-                new Text("KO"),
-                new Text("KK")};
-
-        TextField[] textFields = {
-                new TextField("0"),
-                new TextField("0"),
-                new TextField("0"),
-                new TextField("0"),
-                new TextField("0"),
-                new TextField("0"),
-                new TextField("0"),
-                new TextField("0")};
-
-        for(TextField textField : textFields)
-        {
-            textField.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (!newValue.matches("\\d*")) {
-                    textField.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            });
-        }
-
-        //Format: Health, Karma, Astral
         Rectangle[] rectangles = new Rectangle[3];
 
         rectangles[0] = new Rectangle(200, 50, Color.RED);
