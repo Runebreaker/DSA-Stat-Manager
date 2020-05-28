@@ -1,26 +1,30 @@
 package FunctionalStuff;
 
 public enum StatNames {
-    H("HEALTH", 0),
-    HM("HEALTH_MAX", 1),
-    K("KARMA", 2),
-    KM("KARMA_MAX", 3),
-    A("ASTRAL", 4),
-    AM("ASTRAL_MAX", 5);
+    H("HEALTH"),
+    HM("HEALTH_MAX"),
+    K("KARMA"),
+    KM("KARMA_MAX"),
+    A("ASTRAL"),
+    AM("ASTRAL_MAX"),
+
+    //Format: mu, kl, in, ch, ff, ge, ko, kk
+    MU("Mut"),
+    KL("Klugheit"),
+    IN("Intuition"),
+    CH("Charisma"),
+    FF("Fingerfertigkeit"),
+    GE("Geschicklichkeit"),
+    KO("Konstitution"),
+    KK("Körperkraft");
 
     private String Stat;
-    private int listNumber;
 
-    StatNames(String Stat, int listNumber) {
+    StatNames(String Stat) {
         this.Stat = Stat;
-        this.listNumber = listNumber;
     }
 
     public String getStat() {
         return Stat;
-    }
-
-    public int getListNumber() {
-        return listNumber;
     }
 }
