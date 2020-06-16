@@ -9,7 +9,6 @@ public class SaveManager
 
     private FileInputStream fin;
     private ObjectInputStream oin;
-    private String name = null;
 
     public SaveManager() throws IOException {
 

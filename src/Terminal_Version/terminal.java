@@ -1,16 +1,15 @@
 package Terminal_Version;
 
 import FunctionalStuff.DiceProp;
-import FunctionalStuff.Functionality;
 import FunctionalStuff.Roll;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class terminal
 {
+    //To be redone (Phil do it! :D)
+    /*
     private Scanner sc = new Scanner(System.in);
     private Functionality f;
     private DiceProp[] dp = {
@@ -72,4 +71,5 @@ public class terminal
         }
         return sb.toString();
     }
+    */
 }

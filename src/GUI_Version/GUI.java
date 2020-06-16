@@ -1,7 +1,5 @@
 package GUI_Version;
 
-import FunctionalStuff.Functionality;
-import FunctionalStuff.SaveManager;
 import javafx.application.Application;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
@@ -14,16 +12,15 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
 
 public class GUI extends Application implements Initializable {
     //Properties for change
@@ -31,15 +28,37 @@ public class GUI extends Application implements Initializable {
     private DoubleProperty karma = new SimpleDoubleProperty(1.0);
     private DoubleProperty astral = new SimpleDoubleProperty(1.0);
 
-    private Functionality functionality;
-    private SaveManager saveManager;
-
     @FXML
     private
     Button create, save, load, delete;
     @FXML
     private
     MenuItem menuNew;
+
+    public static final CountDownLatch latch = new CountDownLatch(1);
+    public static GUI startUpTest = null;
+
+    public static GUI waitForStartUpTest() {
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return startUpTest;
+    }
+
+    public static void setStartUpTest(GUI startUpTest0) {
+        startUpTest = startUpTest0;
+        latch.countDown();
+    }
+
+    public GUI() {
+        setStartUpTest(this);
+    }
+
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
 
     private void handleButtonAction(ActionEvent event) {
         Object currentObject = event.getSource();
@@ -71,13 +90,8 @@ public class GUI extends Application implements Initializable {
         menuNew.setOnAction(this::handleButtonAction);
     }
 
-    public GUI() throws IOException {
-        saveManager = new SaveManager();
-        functionality = new Functionality();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+    public GUI(String[] args) throws IOException {
+        Application.launch(args);
     }
 
     @Override
@@ -97,14 +111,7 @@ public class GUI extends Application implements Initializable {
         rectangles[2].widthProperty().bind(bastral);
 
         Group group = new Group();
-        for(Text t : texts)
-        {
-            group.getChildren().add(t);
-        }
-        for(TextField textField : textFields)
-        {
-            group.getChildren().add(textField);
-        }
+
         for(Rectangle r : rectangles)
         {
             group.getChildren().add(r);
