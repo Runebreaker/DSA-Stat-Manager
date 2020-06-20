@@ -1,9 +1,10 @@
 package FunctionalStuff;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class DiceProp
+public class DiceProp implements Serializable
 {
 
     private int sides, amount;

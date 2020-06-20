@@ -1,53 +1,62 @@
 package FunctionalStuff;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
-public class Savestate implements Serializable
-{
+public class Savestate {
     //default serialVersion id
     private static final long serialVersionUID = 1L;
 
-    //New Hashmap where the 1st integer is the Attribute ID and the 2nd is the value
-    private Map<Integer, Integer> currentAttributes = new HashMap<>();
-    private ArrayList<DiceProp> dps = new ArrayList<>();
+    //Create SaveData to be modified
+    private SaveData savedata = new SaveData();
+    private int modifier = 0;
+    private SaveManager saveManager;
+    private Manager manager;
 
-    public Savestate(boolean isNew)
-    {
-        if(isNew)
-        {
-            for(AttributeNames a : AttributeNames.values())
-            {
-                //Default init of Attribute List
-                currentAttributes.put(a.getValue(), 10);
-            }
-            //Initialize dice with default sides
-            dps.add(new DiceProp(1, 0));
-            dps.add(new DiceProp(2, 0));
-            dps.add(new DiceProp(4, 0));
-            dps.add(new DiceProp(8, 0));
-            dps.add(new DiceProp(10, 0));
-            dps.add(new DiceProp(12, 0));
-            dps.add(new DiceProp(20, 0));
-            dps.add(new DiceProp(100, 0));
-        }
+    public Savestate(Manager manager, boolean isNew) throws IOException {
+        this.manager = manager;
     }
 
-    public Map<Integer, Integer> getCurrentAttributes() {
-        return currentAttributes;
+    public Map<AttributeNames, Integer> getCurrentAttributes() {
+        return savedata.getCurrentAttributes();
     }
 
-    public void setCurrentAttributes(Map<Integer, Integer> currentAttributes) {
-        this.currentAttributes = currentAttributes;
+    public void setCurrentAttributes(Map<AttributeNames, Integer> currentAttributes) {
+        savedata.setCurrentAttributes(currentAttributes);
     }
 
     public ArrayList<DiceProp> getDps() {
-        return dps;
+        return savedata.getDps();
     }
 
     public void setDps(ArrayList<DiceProp> dps) {
-        this.dps = dps;
+        savedata.setDps(dps);
+    }
+
+    public void setSaveManager(SaveManager saveManager) {
+        this.saveManager = saveManager;
+    }
+
+    public SaveManager getSaveManager() {
+        return saveManager;
+    }
+
+    public int getModifier() {
+        return modifier;
+    }
+
+    public void setModifier(int modifier) {
+        this.modifier = modifier;
+    }
+
+    public SaveData getSavedata() {
+        return savedata;
+    }
+
+    public void setSavedata(SaveData savedata) {
+        this.savedata = savedata;
     }
 }

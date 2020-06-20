@@ -12,19 +12,23 @@ Basic Functions:
 Extra:
 1. Profile system, save/load feature using all stats, if you use karma or astral etc.
 2. Good looking GUI
-3. Map feature (changeable grid, figure placement)
+3. Map feature (changeable grid, figure placement, underlay a picture)
 4. TBD...
 
 CLASSES (explain what they do):
 
 DiceProp: creates dice with specified sides and amount to dice pool, has roll function
-Functionality: Handles everything, which has to do with stats, health and resources
+Functionality: Handles everything, which has to do with stats, health and resources - REMOVED
 Roll: Class to make it easier to output a roll and which die was used
 StatNames: ENUM to make stats more clear
+Savestate: the new "Functionality", but with better integration
+FunctionalStuff.Manager: Creates objects of all classes to handle communication between them
+Savedata: The data of Savestate that is needed to save
+ErrorController: Handling FXML Error
 
 GUI: does what is says
 Terminal: for testing without having to use gui
 
-THE SAVE PACKAGE IS WHERE SAVES WILL BE LOCATED! (if it wasn't obvious)
+THE SAVE DIRECTORY IS WHERE SAVES WILL BE LOCATED! (if it wasn't obvious)
 
 !!! ADD CLASSES TO LIST, IF YOU CREATE THEM - WITH EXPLANATION !!!
