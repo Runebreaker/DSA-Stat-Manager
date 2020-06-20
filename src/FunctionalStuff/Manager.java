@@ -15,16 +15,17 @@ public class Manager
         ss = new Savestate(this, true);
         sm = new SaveManager(this);
         ss.setSaveManager(sm);
-        sm.configure("sample");
         gui.setManager(this);
-
-        save();
     }
 
     public static void main(String[] args) throws InterruptedException, IOException {
         new Thread(() -> Application.launch(GUI.class)).start();
         gui = GUI.waitForGUI();
         Manager manager = new Manager();
+    }
+
+    public void changeName(String name) {
+        sm.changeName(name);
     }
 
     public void save() throws IOException {
@@ -35,13 +36,11 @@ public class Manager
         return sm.load();
     }
 
-    public void create(String name) throws IOException {
-        sm.configure(name);
-        sm.create();
+    public void configure() throws IOException {
+        sm.configure();
     }
 
-    public void delete(String name) throws IOException, ClassNotFoundException {
-        sm.configure(name);
+    public void delete() throws IOException {
         sm.delete();
     }
 

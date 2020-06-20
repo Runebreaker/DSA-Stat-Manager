@@ -11,53 +11,76 @@ public class SaveManager
     private ObjectInputStream oin;
 
     private Manager manager;
+    private String currentFileName;
     private File currentFile;
 
     public SaveManager(Manager manager) {
         this.manager = manager;
     }
 
-    public void configure(String name) throws IOException {
-        currentFile = new File("./saves/" + name + ".ser");
-
-        fout = new FileOutputStream(currentFile.getName());
-        oout = new ObjectOutputStream(fout);
-
-        fin = new FileInputStream(currentFile.getName());
-        oin = new ObjectInputStream(fin);
+    public void changeName(String name)
+    {
+        this.currentFileName = name;
     }
 
-    public void create() throws IOException {
-        if(!currentFile.exists())
+    public void configure() throws IOException {
+        if(currentFileName != null)
         {
-            System.out.println("File " + currentFile.getName() + " not found. Creating file...");
-            if (currentFile.createNewFile()) {
-                System.out.println("File created: " + currentFile.getName());
+            currentFile = new File("." + File.separator + "saves" + File.separator + currentFileName + ".ser");
+            if(currentFile.createNewFile())
+            {
+                System.out.println("File " + currentFile.getName() + " created.");
+            }
+            else
+            {
+                System.out.println("File already exists.");
             }
         }
         else
         {
-            System.out.println("File " + currentFile.getName() + " already exists.");
+            System.out.println("Please enter a file name first.");
         }
     }
 
     public void save(Object o) throws IOException {
+        fout = new FileOutputStream(currentFile);
+        oout = new ObjectOutputStream(fout);
+
         oout.writeObject(o);
+        System.out.println("Successfully saved.");
+
+        oout.close();
+        fout.close();
     }
 
     public Object load() throws IOException, ClassNotFoundException {
-        return oin.readObject();
+        fin = new FileInputStream(currentFile);
+        oin = new ObjectInputStream(fin);
+
+        Object o = oin.readObject();
+        System.out.println("Successfully loaded.");
+
+        oin.close();
+        fin.close();
+        return o;
     }
 
-    public void delete()
-    {
-        if(currentFile.delete())
+    public void delete() throws IOException {
+        if(currentFileName != null)
         {
-            System.out.println("File " + currentFile.getName() + " deleted successfully");
+            currentFile = new File("." + File.separator + "saves" + File.separator + currentFileName + ".ser");
+            if(currentFile.delete())
+            {
+                System.out.println("File " + currentFile.getName() + " deleted successfully.");
+            }
+            else
+            {
+                System.out.println("Failed to delete the file. '" + currentFile.getName() + "' probably doesn't exist!");
+            }
         }
         else
         {
-            System.out.println("Failed to delete the file. '" + currentFile.getName() + "' probably doesn't exist!");
+            System.out.println("Please enter a file name first.");
         }
     }
 }

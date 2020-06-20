@@ -8,6 +8,7 @@ import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,12 +17,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -40,11 +43,11 @@ public class GUI extends Application implements Initializable {
     private DoubleProperty astral = new SimpleDoubleProperty(1.0);
 
     @FXML
-    private
-    Button create, save, load, delete;
+    private Button create, save, load, delete, refresh;
     @FXML
-    private
-    MenuItem menuNew;
+    private TextField fileNameField;
+    @FXML
+    private MenuItem menuNew;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -75,18 +78,25 @@ public class GUI extends Application implements Initializable {
         try{
             Object currentObject = event.getSource();
             if (currentObject.equals(create) || currentObject.equals(menuNew)) {
-                manager.create("sample");
+                manager.configure();
             } else if (currentObject.equals(save)) {
                 manager.save();
             } else if (currentObject.equals(load)) {
                 manager.load();
             } else if (currentObject.equals(delete)) {
-                manager.delete("sample");
+                manager.delete();
+            } else if (currentObject.equals(refresh)) {
+                refresh();
             }
         }catch (Exception e)
         {
             e.printStackTrace();
         }
+    }
+
+    public void refresh()
+    {
+        if(new File("./saves").isDirectory()) System.out.println("Is Directory");
     }
 
     public GUI() {
@@ -95,12 +105,18 @@ public class GUI extends Application implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //Buttons
         create.setOnAction(this::handleButtonAction);
         save.setOnAction(this::handleButtonAction);
         load.setOnAction(this::handleButtonAction);
         delete.setOnAction(this::handleButtonAction);
+        refresh.setOnAction(this::handleButtonAction);
         menuNew.setOnAction(this::handleButtonAction);
-        menuNew.setOnAction(this::handleButtonAction);
+
+        //Textfields
+        fileNameField.setOnAction(event -> {
+            manager.changeName(fileNameField.getText());
+        });
     }
 
     @Override
