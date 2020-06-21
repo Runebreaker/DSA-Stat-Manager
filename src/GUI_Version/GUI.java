@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,8 +17,10 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -29,6 +32,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GUI extends Application implements Initializable {
@@ -48,6 +52,8 @@ public class GUI extends Application implements Initializable {
     private TextField fileNameField;
     @FXML
     private MenuItem menuNew;
+    @FXML
+    private ListView<File> listView;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -79,14 +85,13 @@ public class GUI extends Application implements Initializable {
             Object currentObject = event.getSource();
             if (currentObject.equals(create) || currentObject.equals(menuNew)) {
                 manager.configure();
+                manager.createFile();
             } else if (currentObject.equals(save)) {
                 manager.save();
             } else if (currentObject.equals(load)) {
                 manager.load();
             } else if (currentObject.equals(delete)) {
                 manager.delete();
-            } else if (currentObject.equals(refresh)) {
-                refresh();
             }
         }catch (Exception e)
         {
@@ -94,13 +99,14 @@ public class GUI extends Application implements Initializable {
         }
     }
 
-    public void refresh()
-    {
-        if(new File("./saves").isDirectory()) System.out.println("Is Directory");
-    }
-
     public GUI() {
         setGUI(this);
+    }
+
+    public void updateListView(ObservableList<File> list)
+    {
+        listView.getItems().clear();
+        listView.setItems(list);
     }
 
     @Override
@@ -116,6 +122,21 @@ public class GUI extends Application implements Initializable {
         //Textfields
         fileNameField.setOnAction(event -> {
             manager.changeName(fileNameField.getText());
+        });
+        manager.refresh();
+
+        //ListView
+        listView.setOnMouseClicked(mouseEvent -> {
+            ObservableList<File> temp = listView.getSelectionModel().getSelectedItems();
+            if(!temp.isEmpty())
+            {
+                String currentName = listView.getSelectionModel().getSelectedItems().get(0).getName();
+                String[] regex = currentName.split(".");
+                if(regex.length > 1)currentName = regex[regex.length - 1];
+                manager.changeName(currentName);
+                fileNameField.setText(currentName);
+                manager.configure();
+            }
         });
     }
 

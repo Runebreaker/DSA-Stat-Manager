@@ -2,8 +2,11 @@ package FunctionalStuff;
 
 import GUI_Version.GUI;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 
 public class Manager
 {
@@ -24,6 +27,17 @@ public class Manager
         Manager manager = new Manager();
     }
 
+    public void refresh()
+    {
+        sm.refresh();
+        gui.updateListView(FXCollections.observableList(sm.getFiles()));
+    }
+
+    public String getCurrentSaveDirectory()
+    {
+        return sm.getCurrentSaveDirectory();
+    }
+
     public void changeName(String name) {
         sm.changeName(name);
     }
@@ -32,16 +46,26 @@ public class Manager
         sm.save(ss.getSavedata());
     }
 
-    public Object load() throws IOException, ClassNotFoundException {
-        return sm.load();
+    public void load() throws IOException, ClassNotFoundException {
+        Object o = sm.load();
+        if(o != null)
+        {
+            ss.setSavedata((SaveData) o);
+        }
     }
 
-    public void configure() throws IOException {
+    public void configure() {
         sm.configure();
+    }
+
+    public void createFile() throws IOException {
+        sm.createFile();
+        refresh();
     }
 
     public void delete() throws IOException {
         sm.delete();
+        refresh();
     }
 
     public void printTest()
