@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Savestate {
+public class SaveState {
     //default serialVersion id
     private static final long serialVersionUID = 1L;
 
@@ -16,7 +16,7 @@ public class Savestate {
     private SaveManager saveManager;
     private Manager manager;
 
-    public Savestate(Manager manager, boolean isNew) throws IOException {
+    public SaveState(Manager manager, boolean isNew) throws IOException {
         this.manager = manager;
     }
 

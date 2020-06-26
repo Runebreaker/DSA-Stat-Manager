@@ -30,21 +30,21 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Return to Manager" />
+                  <MenuItem fx:id="returnToManager" mnemonicParsing="false" text="Return to Manager" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem fx:id="menuSave" mnemonicParsing="false" text="Save" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
+                  <MenuItem fx:id="menuQuit" mnemonicParsing="false" text="Quit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Toggle stat-lock" />
+              <MenuItem fx:id="toggleStatLock" mnemonicParsing="false" text="Toggle stat-lock" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="about" mnemonicParsing="false" text="About" />
             </items>
           </Menu>
         </menus>
@@ -65,14 +65,14 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Spinner editable="true" GridPane.rowIndex="1" />
-            <Spinner editable="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Spinner editable="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Spinner editable="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Spinner editable="true" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Spinner editable="true" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Spinner editable="true" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <Spinner editable="true" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <Spinner fx:id="SpinnerMU" editable="true" GridPane.rowIndex="1" />
+            <Spinner fx:id="SpinnerKL" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Spinner fx:id="SpinnerIN" editable="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Spinner fx:id="SpinnerCH" editable="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Spinner fx:id="SpinnerFF" editable="true" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Spinner fx:id="SpinnerGE" editable="true" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Spinner fx:id="SpinnerKO" editable="true" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <Spinner fx:id="SpinnerKK" editable="true" GridPane.columnIndex="7" GridPane.rowIndex="1" />
             <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="MU" textAlignment="CENTER" wrappingWidth="76.50390625">
                <font>
                   <Font name="System Bold" size="22.0" />
@@ -141,41 +141,42 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="D12" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="D20" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Custom" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                        <Spinner editable="true" GridPane.rowIndex="1" />
-                        <Spinner editable="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Spinner editable="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Spinner editable="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <Spinner editable="true" GridPane.rowIndex="3" />
-                        <Spinner editable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Spinner editable="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <TextField promptText="20, 3" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <Spinner fx:id="customD2" editable="true" GridPane.rowIndex="1" />
+                        <Spinner fx:id="customD4" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Spinner fx:id="customD6" editable="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Spinner fx:id="customD8" editable="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Spinner fx:id="customD10" editable="true" GridPane.rowIndex="3" />
+                        <Spinner fx:id="customD12" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Spinner fx:id="customD20" editable="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <TextField fx:id="customTrue" promptText="20, 3" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                   <Text layoutX="50.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter custom value using:" textAlignment="CENTER" />
                   <Text layoutX="45.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;sides, amount&quot; (i.e. &quot;16, 2&quot;)" />
                   <Text layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier:" textAlignment="CENTER" />
                   <ToggleButton fx:id="statlock" layoutX="169.0" layoutY="2.0" mnemonicParsing="false" text="Statlock" textAlignment="CENTER" />
-                  <ChoiceBox layoutX="31.0" layoutY="46.0" prefHeight="25.0" prefWidth="58.0" />
-                  <ChoiceBox layoutX="89.0" layoutY="46.0" prefHeight="25.0" prefWidth="58.0" />
-                  <ChoiceBox layoutX="147.0" layoutY="46.0" prefHeight="25.0" prefWidth="58.0" />
+                  <ChoiceBox fx:id="FirstRollStat" layoutX="31.0" layoutY="46.0" prefHeight="25.0" prefWidth="58.0" />
+                  <ChoiceBox fx:id="SecondRollStat" layoutX="89.0" layoutY="46.0" prefHeight="25.0" prefWidth="58.0" />
+                  <ChoiceBox fx:id="ThirdRollStat" layoutX="147.0" layoutY="46.0" prefHeight="25.0" prefWidth="58.0" />
                   <Text layoutX="39.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select what you roll on above" />
                   <Text layoutX="71.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Default roll check" />
-                  <Button layoutX="69.0" layoutY="98.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="40.0" text="Roll!" />
-                  <TextArea layoutX="109.0" layoutY="98.0" prefHeight="25.0" prefWidth="52.0" />
+                  <Button fx:id="rollStat" layoutX="69.0" layoutY="98.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="40.0" text="Roll!" />
+                  <TextArea fx:id="statQS" layoutX="109.0" layoutY="98.0" prefHeight="25.0" prefWidth="52.0" />
                   <Text layoutX="168.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QS" />
-                  <Button layoutX="69.0" layoutY="292.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="40.0" text="Roll!" />
-                  <TextArea layoutX="109.0" layoutY="292.0" prefHeight="25.0" prefWidth="52.0" />
+                  <Button fx:id="rollCustom" layoutX="69.0" layoutY="292.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="40.0" text="Roll!" />
+                  <TextArea fx:id="customQS" layoutX="109.0" layoutY="292.0" prefHeight="25.0" prefWidth="52.0" />
                   <Text layoutX="168.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QS" />
-                  <TextField layoutX="44.0" layoutY="142.0" promptText="Character Name" />
-                  <ImageView fitHeight="118.0" fitWidth="149.0" layoutX="44.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
+                  <TextField layoutX="43.0" layoutY="142.0" prefHeight="25.0" prefWidth="191.0" promptText="Character Name" />
+                  <ImageView fx:id="avatar" fitHeight="118.0" fitWidth="149.0" layoutX="44.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="saveByCharacter" layoutY="142.0" mnemonicParsing="false" text="Save" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="92.0">
                <children>
                   <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="557.0" spacing="17.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="37.0" stroke="BLACK" strokeType="INSIDE" width="174.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffbc21" height="37.0" stroke="BLACK" strokeType="INSIDE" width="174.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fc6ff" height="37.0" stroke="BLACK" strokeType="INSIDE" width="174.0" />
+                        <Rectangle fx:id="healthBar" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="37.0" stroke="BLACK" strokeType="INSIDE" width="174.0" />
+                        <Rectangle fx:id="karmaBar" arcHeight="5.0" arcWidth="5.0" fill="#ffbc21" height="37.0" stroke="BLACK" strokeType="INSIDE" width="174.0" />
+                        <Rectangle fx:id="astralBar" arcHeight="5.0" arcWidth="5.0" fill="#1fc6ff" height="37.0" stroke="BLACK" strokeType="INSIDE" width="174.0" />
                      </children>
                      <opaqueInsets>
                         <Insets />
@@ -183,22 +184,22 @@
                   </HBox>
                   <TabPane layoutY="37.0" prefHeight="478.0" prefWidth="557.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                      <Tab text="Skills">
+                      <Tab fx:id="tabSkills" text="Skills">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </content>
                       </Tab>
-                      <Tab text="Advantages">
+                      <Tab fx:id="tabAdvantages" text="Advantages">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </content>
                       </Tab>
-                        <Tab text="Disadvantages">
+                        <Tab fx:id="tabDisadvantages" text="Disadvantages">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                           </content>
                         </Tab>
-                        <Tab text="Map">
+                        <Tab fx:id="tabMap" text="Map">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                           </content>

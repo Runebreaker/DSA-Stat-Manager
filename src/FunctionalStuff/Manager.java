@@ -8,12 +8,12 @@ import java.io.IOException;
 
 public class Manager
 {
-    private Savestate ss;
+    private SaveState ss;
     private SaveManager sm;
     private static GUI gui;
 
     public Manager() throws IOException {
-        ss = new Savestate(this, true);
+        ss = new SaveState(this, true);
         sm = new SaveManager(this);
         ss.setSaveManager(sm);
         gui.setManager(this);
@@ -29,6 +29,11 @@ public class Manager
     {
         sm.refresh();
         gui.updateListView(FXCollections.observableList(sm.getFiles()));
+    }
+
+    public SaveState getSaveState()
+    {
+        return ss;
     }
 
     public String getCurrentSaveDirectory()

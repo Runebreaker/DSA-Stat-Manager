@@ -1,12 +1,16 @@
 package GUI_Version;
 
+import FunctionalStuff.AttributeNames;
 import FunctionalStuff.ErrorController;
 import FunctionalStuff.Manager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.DoubleBinding;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,10 +20,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -42,18 +45,37 @@ public class GUI extends Application implements Initializable {
     private static final Object lock = new Object();
 
     //Properties for change
+    private BooleanProperty statsLock = new SimpleBooleanProperty(false);
+
     private DoubleProperty health = new SimpleDoubleProperty(1.0);
     private DoubleProperty karma = new SimpleDoubleProperty(1.0);
     private DoubleProperty astral = new SimpleDoubleProperty(1.0);
 
+    //Listeners
+    ChangeListener<Boolean> boolListener = (observable, oldValue, newValue) -> {
+        System.out.println("Value changed from " + oldValue + " to " + newValue + "!");
+    };
+
     @FXML
-    private Button create, save, load, delete, refresh;
+    private Button create, save, load, delete, refresh, rollStat, rollCustom, saveByCharacter;
+    @FXML
+    private ToggleButton statlock;
     @FXML
     private TextField fileNameField;
+    @FXML
+    private TextArea statQS, customQS;
+    @FXML
+    private ImageView avatar;
     @FXML
     private MenuItem menuNew;
     @FXML
     private ListView<File> listView;
+    @FXML
+    private Spinner<Integer> SpinnerMU, SpinnerKL, SpinnerIN, SpinnerCH, SpinnerFF, SpinnerGE, SpinnerKO, SpinnerKK;
+    @FXML
+    private ChoiceBox<AttributeNames> FirstRollStat, SecondRollStat, ThirdRollStat;
+    @FXML
+    private Rectangle healthBar, karmaBar, astralBar;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -90,6 +112,7 @@ public class GUI extends Application implements Initializable {
                 manager.save();
             } else if (currentObject.equals(load)) {
                 manager.load();
+                showStatScreen();
             } else if (currentObject.equals(delete)) {
                 manager.delete();
             }
@@ -97,6 +120,16 @@ public class GUI extends Application implements Initializable {
         {
             e.printStackTrace();
         }
+    }
+
+    private void showStatScreen() throws IOException {
+        Stage statScreen = new Stage();
+        statScreen.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader loader = new FXMLLoader(GUI.class.getResource("../FXMLFiles/StatScreen.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+        statScreen.setScene(new Scene(root, 800, 600));
+        statScreen.show();
     }
 
     public GUI() {
@@ -111,19 +144,36 @@ public class GUI extends Application implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Buttons
+        //Button
         create.setOnAction(this::handleButtonAction);
         save.setOnAction(this::handleButtonAction);
         load.setOnAction(this::handleButtonAction);
         delete.setOnAction(this::handleButtonAction);
         refresh.setOnAction(this::handleButtonAction);
-        menuNew.setOnAction(this::handleButtonAction);
+        rollStat.setOnAction(this::handleButtonAction);
+        rollCustom.setOnAction(this::handleButtonAction);
+        saveByCharacter.setOnAction(this::handleButtonAction);
 
-        //Textfields
+        //Toggle Button
+        statsLock.removeListener(boolListener);
+        statsLock.addListener(boolListener);
+        try{
+            statlock.selectedProperty().bindBidirectional(statsLock);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        //Textfield
         fileNameField.setOnAction(event -> {
             manager.changeName(fileNameField.getText());
         });
         manager.refresh();
+
+        //TextArea
+        //statQS
+        //customQS
 
         //ListView
         listView.setOnMouseClicked(mouseEvent -> {
@@ -138,6 +188,32 @@ public class GUI extends Application implements Initializable {
                 manager.configure();
             }
         });
+
+        //ImageView
+        //avatar...
+
+        //MenuItem
+        menuNew.setOnAction(this::handleButtonAction);
+
+        //Spinner
+        //SpinnerMU...
+        //SpinnerKL...
+        //SpinnerIN...
+        //SpinnerCH...
+        //SpinnerFF...
+        //SpinnerGE...
+        //SpinnerKO...
+        //SpinnerKK...
+
+        //ChoiceBox
+        //FirstRollStat
+        //SecondRollStat
+        //ThirdRollStat
+
+        //Rectangle
+        //healthBar
+        //karmaBar
+        //astralBar
     }
 
     @Override
@@ -163,6 +239,7 @@ public class GUI extends Application implements Initializable {
         for (Rectangle r : rectangles) {
             group.getChildren().add(r);
         }
+        //above is currently deprecated, using FXML
 
         //Import FXML File for GUI
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXMLFiles/FileScreen.fxml"));
