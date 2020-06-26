@@ -52,11 +52,11 @@ public class Savestate {
         this.modifier = modifier;
     }
 
-    public SaveData getSavedata() {
+    public SaveData getSaveData() {
         return savedata;
     }
 
-    public void setSavedata(SaveData savedata) {
+    public void setSaveData(SaveData savedata) {
         this.savedata = savedata;
     }
 }

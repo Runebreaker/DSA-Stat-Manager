@@ -3,10 +3,8 @@ package FunctionalStuff;
 import GUI_Version.GUI;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
 
 public class Manager
 {
@@ -43,14 +41,14 @@ public class Manager
     }
 
     public void save() throws IOException {
-        sm.save(ss.getSavedata());
+        sm.save(ss.getSaveData());
     }
 
     public void load() throws IOException, ClassNotFoundException {
         Object o = sm.load();
         if(o != null)
         {
-            ss.setSavedata((SaveData) o);
+            ss.setSaveData((SaveData) o);
         }
     }
 

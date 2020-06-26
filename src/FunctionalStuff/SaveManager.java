@@ -95,21 +95,23 @@ public class SaveManager
     }
 
     public Object load() throws IOException, ClassNotFoundException {
-        Object o;
+        Object o = null;
         if(currentFile != null && currentFile.exists())
         {
             fin = new FileInputStream(currentFile);
-            oin = new ObjectInputStream(fin);
 
-            o = oin.readObject();
-            System.out.println("Successfully loaded.");
+            if(fin.available() == 1)
+            {
+                oin = new ObjectInputStream(fin);
+                if(oin.available() == 1) o = oin.readObject();
+                oin.close();
+            }
 
-            oin.close();
             fin.close();
+            System.out.println("Successfully loaded.");
         }
         else
         {
-            o = null;
             System.out.println("File not found.");
         }
         return o;

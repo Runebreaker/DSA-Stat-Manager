@@ -191,7 +191,7 @@ public class GUI extends Application implements Initializable {
         rectangles[2].setX(savescene.getWidth() - 200);
         rectangles[2].setY(100);
 
-        primaryStage.setTitle("DSA Stat FunctionalStuff.Manager by Loyal Raven Studios");
+        primaryStage.setTitle("DSA Stat Manager by Loyal Raven Studios");
         savescene.setFill(Color.STEELBLUE);
         primaryStage.setScene(savescene);
         primaryStage.setResizable(false);
