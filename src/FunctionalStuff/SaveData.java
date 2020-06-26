@@ -1,5 +1,9 @@
 package FunctionalStuff;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 
 import java.io.Serializable;
@@ -12,6 +16,10 @@ public class SaveData implements Serializable {
     private ArrayList<DiceProp> dps = new ArrayList<>();
     private String characterName;
     private Image characterImage;
+
+    //Properties
+    private StringProperty characterNameProp = new SimpleStringProperty("");
+    private ObjectProperty<Image> imageObjectProperty = new SimpleObjectProperty<>();
 
     public SaveData()
     {
@@ -30,8 +38,8 @@ public class SaveData implements Serializable {
         dps.add(new DiceProp(0, 0)); //Custom sides, used for rolls that dont use default dice
 
         //Default Values for init
-        characterName = "Darius Marno";
-        characterImage = new Image("sample.png");
+        characterName = "Sample Sampleton";
+        characterImage = new Image("FunctionalStuff/sample.png");
     }
 
     public String getCharacterName() {
